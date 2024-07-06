@@ -1,5 +1,5 @@
 import React from "react";
-// import LoginPage from "./pages/Auth/Login";
+import Login from "./pages/auth/login";
 import SignUp from "./pages/auth/signIn";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -36,7 +36,7 @@ function App() {
           {/* <GoogleOAuthProvider clientId={process.env.REACT_APP_AUTH_CLIENT_ID}> */}
           <Router>
             <Routes>
-              {/* <Route exact path="/login" element={<LoginPage />} /> */}
+              <Route exact path="/login" element={<Login />} />
               <Route exact path="/signup" element={<SignUp />} />
             </Routes>
           </Router>

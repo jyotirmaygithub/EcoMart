@@ -1,4 +1,7 @@
 import {
+  LOGIN_REQUEST,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
   REGISTER_USER_FAIL,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_REQUEST,
@@ -13,6 +16,7 @@ const initialState = {
 
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOGIN_REQUEST:
     case REGISTER_USER_REQUEST:
       return {
         ...state,
@@ -20,7 +24,7 @@ export const userReducer = (state = initialState, action) => {
         isAuthenticated: false,
         error: null,
       };
-
+    case LOGIN_SUCCESS:
     case REGISTER_USER_SUCCESS:
       return {
         ...state,
@@ -30,6 +34,7 @@ export const userReducer = (state = initialState, action) => {
         error: null,
       };
 
+    case LOGIN_FAIL:
     case REGISTER_USER_FAIL:
       return {
         ...state,
