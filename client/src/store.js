@@ -3,10 +3,12 @@ import {thunk} from "redux-thunk";
 import {
   userReducer,
 } from "./reducer/userReducer";
+import {productsReducer} from "./reducer/productReducer"
 
 // Combine your reducers into a root reducer
 const rootReducer = combineReducers({
   userData: userReducer,
+  products: productsReducer,
 });
 
 // Create an array of middleware (in this case, just redux-thunk)
