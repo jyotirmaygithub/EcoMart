@@ -7,6 +7,15 @@ import {
   REGISTER_USER_SUCCESS,
 } from "../constants/userConstant";
 
+function storeAuthToken(userAuth_Token) {
+  // Set the cookie with an expiration time
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 7); // Set to expire in 7 days
+  document.cookie = `auth-token=${
+    userAuth_Token.auth_token
+  }; expires=${expirationDate.toUTCString()}; path=/`;
+}
+
 // login user
 export function login(email, password) {
   return async function (dispatch) {
@@ -24,10 +33,12 @@ export function login(email, password) {
         }
       );
       const data = await response.json();
+
       console.log("resposne =", data);
 
       if (response.ok) {
-        dispatch({ type: LOGIN_SUCCESS, payload: data.user });
+        storeAuthToken(data);
+        dispatch({ type: LOGIN_SUCCESS, payload: data });
       }
     } catch (error) {
       dispatch({ type: LOGIN_FAIL, payload: error.message });
@@ -58,6 +69,7 @@ export function signUp(name, email, password) {
       console.log("resposne =", data);
 
       if (response.ok) {
+        storeAuthToken(data)
         dispatch({ type: REGISTER_USER_SUCCESS, payload: data });
       } else {
         dispatch({
