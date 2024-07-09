@@ -7,33 +7,33 @@ export default function Slider() {
       <AwesomeSlider
         className="slider"
         bullets={false} // Disable navigation bullets
-        style={{ height: "500px" }} // Adjust slider height as needed
+        style={{ height: "400px" }} // Adjust slider height as needed
       >
         <div>
           <img
-            src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTIzNDJ8MHwxfGFsbHx8fHx8fHx8fDE3MjA0NDQ1ODF8&ixlib=rb-4.0.3&q=85"
-            alt="cloth 1"
+            src="https://images.unsplash.com/photo-1617143207675-e7e6371f5f5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTIzNDJ8MHwxfHNlYXJjaHwzMXx8bmlrZSUyMHNob2VzJTIwfGVufDB8fHx8MTcyMDUyOTUxMnww&ixlib=rb-4.0.3&q=80&w=1080"
+            alt="nike shoes 1"
             className="slider-image"
           />
         </div>
         <div>
           <img
-            src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTIzNDJ8MHwxfGFsbHx8fHx8fHx8fDE3MjA0NDUxMTN8&ixlib=rb-4.0.3&q=85"
-            alt="cloth 2"
+            src="https://images.unsplash.com/photo-1567016515344-5e3b0d67bb75?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTIzNDJ8MHwxfHNlYXJjaHw0NHx8ZGVjb3JzfGVufDB8fHx8MTcyMDUyOTU4MHww&ixlib=rb-4.0.3&q=80&w=1080"
+            alt="decor"
             className="slider-image"
           />
         </div>
         <div>
           <img
-            src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTIzNDJ8MHwxfGFsbHx8fHx8fHx8fDE3MjA0NDQ1ODF8&ixlib=rb-4.0.3&q=85"
-            alt="cloth 3"
+            src="https://images.unsplash.com/photo-1549438247-223f2db1dd29?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTIzNDJ8MHwxfHNlYXJjaHw2M3x8Y2VyZWFscyUyMHxlbnwwfHx8fDE3MjA1Mjk2NDN8MA&ixlib=rb-4.0.3&q=80&w=1080"
+            alt="food"
             className="slider-image"
           />
         </div>
         <div>
           <img
-            src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTIzNDJ8MHwxfGFsbHx8fHx8fHx8fDE3MjA0NDQ1ODF8&ixlib=rb-4.0.3&q=85"
-            alt="cloth 4"
+            src="https://images.unsplash.com/photo-1622774161048-863b17ed0d8e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTIzNDJ8MHwxfHNlYXJjaHwxMzF8fG1hYyUyMHxlbnwwfHx8fDE3MjA1Mjk5NDR8MA&ixlib=rb-4.0.3&q=80&w=1080"
+            alt="mac "
             className="slider-image"
           />
         </div>
