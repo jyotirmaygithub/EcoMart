@@ -15,6 +15,8 @@ import LandingPage from "./pages/landingPage";
 import ProductDetails from "./layout/product/productDetails";
 import Header from "./components/header/header";
 import Cart from "./components/Cart/cart";
+import ViewAdminProfile from "./pages/admin/profile"
+import ProductList from "./pages/admin/productList";
 
 const theme = createTheme({
   palette: {
@@ -27,7 +29,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           // Set the default icon color to primary.main (light blue)
-          color: "#60A5FA", // or 'currentColor' for inherited color
+          color: "white ", // or 'currentColor' for inherited color
         },
       },
     },
@@ -45,10 +47,12 @@ function App() {
               <Route exact path="/" element={<LandingPage />} />
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/signup" element={<SignUp />} />
-              <Route exact path="/aboutus" element={<AbouUsPage />} />
+              <Route exact path="/about" element={<AbouUsPage />} />
               <Route exact path="/contact" element={<ContactForm />} />
               <Route exact path="/product/:id" element={<><Header/><ProductDetails/></>} />
               <Route exact path="/cart" element={<Cart />} />
+              <Route exact path="/view-admin" element={<ViewAdminProfile />} />
+              <Route exact path="/view-products" element={<ProductList/>} />
             </Routes>
           </Router>
           <ToastContainer autoClose={2000} transition={Slide} />

@@ -8,6 +8,7 @@ import {
   AUTHENTICATED_USER_REQUEST,
   AUTHENTICATED_USER_REQUEST_SUCCESS,
   AUTHENTICATED_USER_REQUEST_FAIL,
+  TOTAL_NUMBER_USER_REQUEST_SUCCESS
 } from "../constants/userConstant";
 import {getAuthToken} from "../actions/authAction"
 
@@ -138,6 +139,35 @@ export function fetchUserDetails() {
         type: AUTHENTICATED_USER_REQUEST_FAIL,
         payload: error.message,
       });
+      console.error("Error adding item to cart:", error.message);
+    }
+  };
+}
+
+export function totalUsers() {
+  return async function (dispatch) {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_DEV_URL}/api/retriveData/total-users`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const userData = await response.json();
+      console.log("userdata response  = ", userData);
+
+      dispatch({
+        type: TOTAL_NUMBER_USER_REQUEST_SUCCESS,
+        payload: userData,
+      });
+    } catch (error) {
       console.error("Error adding item to cart:", error.message);
     }
   };

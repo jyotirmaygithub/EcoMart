@@ -1,8 +1,10 @@
 const product = require("../models/product");
+const Users = require("../models/User");
 const CartItem = require("../models/Cart");
 const express = require("express");
 const router = express.Router();
 const fetchUserId = require("../middleware/fetchUserId");
+const User = require("../models/User");
 
 // Route  : To retrive products data.
 router.get("/products-data", async (req, res) => {
@@ -30,17 +32,29 @@ router.post("/single-product", async (req, res) => {
 });
 
 // Route : To retrive cart data.
-router.get('/cart-products', fetchUserId, async (req, res) => {
+router.get("/cart-products", fetchUserId, async (req, res) => {
   try {
     // Retrieve all cart items for the specific user
     const cartItems = await CartItem.find({ userId: req.userId });
 
     res.send({ data: cartItems });
   } catch (error) {
-    console.error('Error retrieving products:', error);
-    res.status(500).send('Internal server error');
+    console.error("Error retrieving products:", error);
+    res.status(500).send("Internal server error");
   }
 });
 
+router.get("/total-users", async (req, res) => {
+  try {
+    // Retrieve all documents from the products collection
+    const products = await User.find();
+    const numberOfProducts = products.length;
+    console.log("number of produtcs = ", numberOfProducts);
+    res.send({ data: numberOfProducts });
+  } catch (error) {
+    console.error("Error retrieving products:", error);
+    res.status(500).send("Internal server error");
+  }
+});
 
 module.exports = router;

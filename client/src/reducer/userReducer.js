@@ -8,12 +8,14 @@ import {
   AUTHENTICATED_USER_REQUEST,
   AUTHENTICATED_USER_REQUEST_SUCCESS,
   AUTHENTICATED_USER_REQUEST_FAIL,
+  TOTAL_NUMBER_USER_REQUEST_SUCCESS,
 } from "../constants/userConstant";
 
 const initialState = {
   loading: false,
   isAuthenticated: false,
   user: {},
+  totalusers: null,
   error: null,
 };
 
@@ -49,7 +51,11 @@ export const userReducer = (state = initialState, action) => {
         user: {},
         error: action.payload,
       };
-
+    case TOTAL_NUMBER_USER_REQUEST_SUCCESS:
+      return {
+        ...state,
+        totalusers: action.payload,
+      };
     default:
       return state;
   }
