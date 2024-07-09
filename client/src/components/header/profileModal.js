@@ -9,53 +9,76 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { Avatar } from "@mui/material";
-// import { StateContext } from "../../context/States";
 import {
   ContactSupport,
   Info,
   Logout,
   Person2Outlined,
-  HotelOutlined,
-  LivingOutlined,
+  ShoppingCartOutlined,
   MenuOutlined,
+  AdminPanelSettingsOutlined,
+  AddBoxOutlined,
+  EditOutlined,
+  DeleteOutlined,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-// import { TokenStatusContext } from "../../context/tokenStatus";
+import { useSelector } from "react-redux";
 
 export default function AnchorTemporaryDrawer() {
+  const { user } = useSelector((state) => state.userData);
   const navigate = useNavigate();
-//   const { userDocument } = StateContext();
-//   const { checkCookie, deleteAuthTokenCookie } = TokenStatusContext();
   const [state, setState] = React.useState({});
-  const toggleDrawer = (anchor, open) => async (event) => {
-    // if(!checkCookie()){
-    //   navigate('/login')
-    // }
-    // {
-      setState({ ...state, [anchor]: open });
-    // }
+
+  React.useEffect(() => {}, [user]);
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    setState({ ...state, [anchor]: open });
   };
-  
-  function handleClick(value) {
+
+  const handleClick = (value) => {
     if (value === "Logout") {
-    //   deleteAuthTokenCookie();
       navigate(`/login`);
-    } else if (value === "View Profile") {
-    //   navigate(`/account/${userDocument.name}`);
-    } else if (value === "editProfile") {
-      navigate(`/account/edit-profile`);
-    } else if (value === "Bookings") {
-    //   navigate(`/booking/${userDocument.name}`);
-    } else if (value === "Registration") {
-    //   navigate(`/Registration/${userDocument.name}`);
     } else {
-      navigate(`/${value}`);
+      navigate(`/${value.toLowerCase().replace(" ", "-")}`);
     }
-  }
-  const icons = [<Person2Outlined />, <HotelOutlined />, <LivingOutlined />];
-  const iconCount = icons.length;
-  const icons2 = [<Info />, <ContactSupport />, <Logout />];
-  const iconCount2 = icons.length;
+  };
+
+  const isAdmin = (userData) => {
+    // Check if user and user data exist, then compare email and ID
+    if (user && userData) {
+      if (
+        process.env.REACT_APP_ADMIN_EMAIL === userData.email &&
+        process.env.REACT_APP_ADMIN_ID === userData._id
+      ) {
+        console.log("User is an admin.");
+        return true;
+      } else {
+        console.log("User is not an admin.");
+      }
+    }
+
+    return false;
+  };
+
+  const icons = {
+    "View Profile": <Person2Outlined />,
+    Orders: <ShoppingCartOutlined />,
+    About: <Info />,
+    Contact: <ContactSupport />,
+    Logout: <Logout />,
+    "View Admin": <AdminPanelSettingsOutlined />,
+    "New Product": <AddBoxOutlined />,
+    "Update Product": <EditOutlined />,
+    "Delete Product": <DeleteOutlined />,
+  };
+
+  const userOptions = ["View Profile", "Orders"];
+  const adminOptions = [
+    "View Admin",
+    "New Product",
+    "Update Product",
+    "Delete Product",
+  ];
 
   const list = (anchor) => (
     <Box
@@ -65,20 +88,27 @@ export default function AnchorTemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <div className="grid justify-center items-center my-2 space-y-2">
-        <Avatar
-        //   src={userDocument ? userDocument.picture : ""}
-          sx={{ width: 150, height: 150 }}
-          alt="User Avatar"
-        />
-        <Button variant="contained" sx={{background : "#60A5FA"}} onClick={(e) => handleClick("editProfile")}>
-          Edit Profile
-        </Button>
+        <Avatar sx={{ width: 150, height: 150 }} alt="User Avatar" />
       </div>
       <List>
-        {["View Profile", "Bookings", "Registration"].map((text, index) => (
+        {isAdmin(user.user_data) &&
+          adminOptions.map((text) => (
+            <ListItem
+              key={text}
+              disablePadding
+              onClick={() => handleClick(text)}
+            >
+              <ListItemButton>
+                <ListItemIcon>{icons[text]}</ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        <Divider />
+        {userOptions.map((text) => (
           <ListItem key={text} disablePadding onClick={() => handleClick(text)}>
             <ListItemButton>
-              <ListItemIcon>{icons[index % iconCount]}</ListItemIcon>
+              <ListItemIcon>{icons[text]}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
@@ -86,10 +116,10 @@ export default function AnchorTemporaryDrawer() {
       </List>
       <Divider />
       <List>
-        {["About", "Contact", "Logout"].map((text, index) => (
+        {["About", "Contact", "Logout"].map((text) => (
           <ListItem key={text} disablePadding onClick={() => handleClick(text)}>
             <ListItemButton>
-              <ListItemIcon>{icons2[index % iconCount2]}</ListItemIcon>
+              <ListItemIcon>{icons[text]}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
@@ -102,9 +132,7 @@ export default function AnchorTemporaryDrawer() {
     <div>
       <React.Fragment key="avatar">
         <Button className="space-x-2" onClick={toggleDrawer("avatar", true)}>
-          {/* Render your Avatar component here */}
-          <MenuOutlined sx={{color:"black"}}/>
-          {/* <Avatar src={userDocument ? userDocument.picture : ""} alt="User Avatar" /> */}
+          <MenuOutlined sx={{ color: "black" }} />
         </Button>
         <Drawer
           anchor="right"
