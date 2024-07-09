@@ -31,6 +31,7 @@ export function getProduct() {
       }
 
       const products = await response.json();
+      console.log("PRODDGSGGG ",products)
 
       // Dispatch success action with products data
       dispatch({
