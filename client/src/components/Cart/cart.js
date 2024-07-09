@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./cart.css";
 import TextField from "@mui/material/TextField";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,9 +6,7 @@ import { retrieveCartItems, removeItemFromCart } from "../../actions/cartAction"
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
-import { Link } from "react-router-dom";
-// import MetaData from "../layouts/MataData/MataData";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CartItem from "./cartItem";
 import { dispalyMoney, generateDiscountedPrice } from "../DisplayMoney/displayMoney";
 
@@ -17,24 +15,22 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const { cartItems } = useSelector((state) => state.cart);
-  
-  useEffect(()=>{
-    dispatch(retrieveCartItems());
-  },[dispatch])
+  console.log("cartitems = " ,cartItems)
 
-  // New code
+  useEffect(() => {
+    dispatch(retrieveCartItems());
+  }, [dispatch]);
+
   const [couponCode, setCouponCode] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [isValid, setIsValid] = useState(true);
-
-  // New code end
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
       return;
     } else {
-    //   dispatch(addItemToCart(id, newQty));
+      // dispatch(addItemToCart(id, newQty));
     }
   };
 
@@ -43,13 +39,10 @@ const Cart = () => {
     if (1 >= quantity) {
       return;
     }
-
     // dispatch(addItemToCart(id, newQty));
   };
 
-  // New code
   const handleApplyCoupon = () => {
-    // Handle apply coupon logic
     setIsValid(false);
   };
 
@@ -57,18 +50,15 @@ const Cart = () => {
     setIsFocused(event.target.value !== "");
   };
 
-  // New code end
-
-  const deleteCartItems = (id) => {
-    console.log("id = ",id)
-    // dispatch(removeItemFromCart(id));
-  };
+  function deleteCartItems(productId) {
+    console.log("product id = ",productId)
+    dispatch(removeItemFromCart(productId));
+  }
 
   const checkoutHandler = () => {
     navigate("/login?redirect=/shipping");
   };
 
-  // Calculate price after discount
   let totalPrice = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -83,14 +73,13 @@ const Cart = () => {
   return (
     <>
       <div className="cartPage">
-        {/* <MetaData title="Your Cart" /> */}
         <div className="cart_HeaderTop">
           <div className="headerLeft">
             <Typography variant="h5" component="h1" className="cartHeading">
               Shopping Cart
             </Typography>
             <Typography variant="body2" className="cartText3">
-              {/* TOTAL ({cartItems.length} item) <b>{final}</b> */}
+              TOTAL ({cartItems.length} item) <b>{final}</b>
             </Typography>
           </div>
           <Typography
@@ -107,7 +96,6 @@ const Cart = () => {
         {cartItems.length === 0 ? (
           <div className="emptyCartContainer">
             <RemoveShoppingCartIcon className="cartIcon" />
-
             <Typography variant="h5" component="h1" className="cartHeading">
               Your Shopping Cart is Empty
             </Typography>
@@ -134,7 +122,7 @@ const Cart = () => {
                     >
                       <CartItem
                         item={item}
-                        deleteCartItems={deleteCartItems}
+                        deleteCartItems={() => deleteCartItems(item.productId)}
                         decreaseQuantity={decreaseQuantity}
                         increaseQuantity={increaseQuantity}
                         length={cartItems.length}
@@ -154,7 +142,6 @@ const Cart = () => {
                   <div className="order_summary_details">
                     <div className="price order_Summary_Item">
                       <span>Original Price</span>
-                      {/* ORIGINAL PRICE TOTAL */}
                       <p>{totalPrice}</p>
                     </div>
 
@@ -176,7 +163,6 @@ const Cart = () => {
                     <div className="total_price order_Summary_Item">
                       <div>
                         <h4>Total Price</h4>
-
                         <p
                           style={{
                             fontSize: "14px",

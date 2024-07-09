@@ -180,6 +180,7 @@ function CartItem({
   increaseQuantity,
   length,
 }) {
+  console.log("item = ",item.title)
   // Calculate price after discount
   let finalPrice = generateDiscountedPrice(item.price);
   let discountedPrice = item.price - finalPrice;
@@ -191,13 +192,13 @@ function CartItem({
     <StyledCard>
       <StyledCardMedia
         image={item.image}
-        title={item.name}
+        title={item.title}
       />
       <StyledCardContent>
         <div>
           <CartHeader>
             <TitleTypography variant="subtitle1">
-              {item.name}
+              {item.title}
             </TitleTypography>
             <CartDeleteIconButton
               aria-label="delete"
