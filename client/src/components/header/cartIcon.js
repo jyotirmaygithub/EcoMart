@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const CartIcon = () => {
-//   const { cartItems } = useSelector((state) => state.cart);
-//   const cartItemCount = cartItems.length;
+  const { cartItems } = useSelector((state) => state.cart);
 
+  useEffect(()=>{
+
+  },[cartItems])
   return (
     <div className="cartIconWrapper">
       <span className="cartIcon">
         <ShoppingCartIcon sx={{ fontSize: 24 }} className="icon" />
-        {/* {cartItemCount > 0 && (
-          <span className="cartItemCount">{cartItemCount}</span>
-        )} */}
+        {cartItems.length > 0 && (
+          <span className="text-yellow-800">{cartItems.length}</span>
+        )}
       </span>
     </div>
   );
