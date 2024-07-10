@@ -13,12 +13,18 @@ const ProductList = () => {
   }, [dispatch]);
 
   return (
-    <div className="flex flex-wrap">
-      { products.data &&
-        products.data.map((product) => (
-          <ProductLayout key={product._id} product={product} />
-        ))
-      }
+    <div className="flex-col justify-center items-center m-16">
+      <div
+        className="flex justify-center items-center my-5"
+      >
+        <h1 className="font-bold text-2xl">Our Products</h1>
+      </div>
+      <div className="flex flex-wrap">
+        {products.data &&
+          products.data.map((product) => (
+            <ProductLayout key={product._id} product={product} />
+          ))}
+      </div>
     </div>
   );
 };

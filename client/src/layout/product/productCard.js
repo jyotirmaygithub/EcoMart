@@ -5,104 +5,81 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  Button,
   Box,
 } from "@mui/material";
-import Rating from "@mui/material/Rating";
-import { FitScreen } from "@mui/icons-material";
-import { Link } from "react-router-dom";
-import { dispalyMoney, generateDiscountedPrice } from "../../components/DisplayMoney/displayMoney";
-// import { addItemToCart } from "../../actions/cartAction";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getProductDetails } from "../../actions/productAction";
+import {
+  dispalyMoney,
+  generateDiscountedPrice,
+} from "../../components/DisplayMoney/displayMoney";
+import nlp from "compromise";
+import StarShowCase from "../../utils/star";
+import FreeShippingIcon from "@mui/icons-material/LocalShipping";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  console.log("rating =", product.ratings);
+
   let discountPrice = generateDiscountedPrice(product.price);
   discountPrice = dispalyMoney(discountPrice);
   const oldPrice = dispalyMoney(product.price);
-  console.log("images = ",product)
-  const truncated =
-    product.description.split(" ").slice(0, 5).join(" ") + "...";
-  const nameTruncated = product.name.split(" ").slice(0, 3).join(" ") + "...";
 
-  const addTocartHandler = (id, qty) => {
-    // dispatch(addItemToCart(id, qty));
+  // Extract key features using compromise
+  const extractKeyFeatures = (description) => {
+    const doc = nlp(description);
+    const keywords = doc.nouns().out("array");
+    return keywords.slice(0, 10).join(" ") + "...";
   };
 
-  function handleSingleProduct(){
-     dispatch(handleSingleHotel(product._id))
-    navigate(`/hotel/${product._id}`);
+  const truncatedDescription = extractKeyFeatures(product.description);
+
+  function handleSingleProduct() {
+    dispatch(getProductDetails(product._id));
+    navigate(`/product/${product._id}`);
   }
 
   return (
-    <Card className="w-72 h-auto m-4 bg-white cursor-pointer " onClick={handleSingleProduct}>
-      {/* <Link
-        to={`/product/${product._id}`}
-        className="text-inherit no-underline"
-      > */}
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            className="h-52 w-11/12 object-cover mx-auto mt-4"
-            image={product.images[0]}
-            alt={product.name}
-          />
-          <CardContent>
+    <Card className="w-72 h-auto my-6 mx-6 bg-white cursor-pointer shadow-lg rounded-lg flex flex-col justify-between">
+      <CardActionArea onClick={handleSingleProduct}>
+        <CardMedia
+          component="img"
+          className="h-52 w-full object-cover rounded-t-lg"
+          image={product.images[0]}
+          alt={product.name}
+        />
+        <CardContent className="flex-grow">
+          <Box className="flex flex-col items-start">
+            <p className="font-bold">{discountPrice}</p>
             <Typography
-              gutterBottom
-              className="font-bold text-black"
+              variant="body1"
+              className="font-bold text-gray-600 mr-2"
             >
-              {nameTruncated}
+              MRP: <span className="line-through">{oldPrice}</span>
             </Typography>
-            <Box className="flex items-center">
-              <Rating
-                name="rating"
-                value={product.ratings}
-                precision={0.1}
-                readOnly
-                size="small"
-                className="text-red-600 mr-2"
-              />
-              <Typography variant="body2" color="textSecondary">
-                ({product.numOfReviews})
-              </Typography>
-            </Box>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              className="text-sm font-medium mt-1 mb-1 truncate-3-lines"
-            >
-              {truncated}
-            </Typography>
-            <Box className="flex items-center">
-              <Typography
-                variant="body1"
-                className="line-through font-bold text-gray-600 mr-2"
-              >
-                {oldPrice}
-              </Typography>
-              <Typography
-                variant="body1"
-                className="font-bold text-lg"
-              >
-                {discountPrice}
-              </Typography>
-            </Box>
-          </CardContent>
-        </CardActionArea>
-      {/* </Link> */}
-      <Box className="flex justify-center p-2">
-        <Button
-          variant="contained"
-          className="bg-black text-white rounded-md font-bold w-full h-12 hover:bg-red-600 hover:text-black"
-          onClick={() => addTocartHandler(product._id, 1)}
-        >
-          Add to Cart
-        </Button>
-      </Box>
+          </Box>
+          <Typography
+            variant="body2"
+            className="text-sm font-medium mt-1 mb-1 truncate-3-lines"
+            sx={{ color: "#3498DB" }}
+          >
+            {truncatedDescription}
+          </Typography>
+          <StarShowCase rating={product.ratings} />
+
+          <Typography
+            variant="body2"
+            className="text-xs font-medium mt-2 flex items-center"
+            sx={{ color: "#6AB04C" }}
+          >
+            <FreeShippingIcon sx={{ fontSize: 16, mr: 1, color:"#6AB04C" }} />
+            Free delivery for members only
+          </Typography>
+        </CardContent>
+      </CardActionArea>
     </Card>
   );
 };
