@@ -1,11 +1,6 @@
-import React from "react";
-import { CircularProgress } from "@mui/material";
+import * as React from "react";
+import CircularProgress from "@mui/material/CircularProgress";
 
-
-
-const Loader = ({width}) => (
-    <CircularProgress width={width} />
-
-);
-
-export default Loader;
+export default function CircularIndeterminate() {
+  return <CircularProgress size={23} sx={{ color: "white" }} />;
+}

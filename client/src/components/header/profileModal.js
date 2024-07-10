@@ -59,6 +59,7 @@ export default function AnchorTemporaryDrawer() {
 
     return false;
   };
+  console.log(user.user_data && user.user_data.picture)
 
   const icons = {
     "View Profile": <Person2Outlined />,
@@ -88,7 +89,7 @@ export default function AnchorTemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <div className="grid justify-center items-center my-2 space-y-2">
-        <Avatar sx={{ width: 150, height: 150 }} alt="User Avatar" />
+        <Avatar  src={user.user_data ? user.user_data.picture : ""} sx={{ width: 150, height: 150 }} alt="User Avatar" />
       </div>
       <List>
         {isAdmin(user.user_data) &&
@@ -131,8 +132,9 @@ export default function AnchorTemporaryDrawer() {
   return (
     <div>
       <React.Fragment key="avatar">
-        <Button className="space-x-2" onClick={toggleDrawer("avatar", true)}>
-          <MenuOutlined sx={{ color: "black" }} />
+        <Button className="space-x-2 border-white" onClick={toggleDrawer("avatar", true)}>
+          <Avatar  src={user.user_data ? user.user_data.picture : ""} sx={{border: '2px solid white',}} alt="User Avatar" />
+          <MenuOutlined sx={{ color: "white" }} />     
         </Button>
         <Drawer
           anchor="right"

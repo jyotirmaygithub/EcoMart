@@ -54,7 +54,7 @@ function Signup() {
 
     if (isAuthenticated) {
       toast.success("User Registered Successfully");
-      navigate("/account");
+      navigate("/");
     }
   }, [isAuthenticated, loading, error, navigate]);
 
@@ -258,7 +258,7 @@ function Signup() {
               style={{ marginTop: "1rem" }}
             >
               Already have an account?
-              <Link to="/login" className="text-primary no-underline">
+              <Link to="/login" className="text-primary no-underline hover:underline">
                 Login
               </Link>
             </Typography>

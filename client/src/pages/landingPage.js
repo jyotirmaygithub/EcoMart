@@ -4,6 +4,7 @@ import Carousel from "../components/Carousel/carousel";
 import ProductList from "../components/products/products";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserDetails } from "../actions/userActions";
+import Slider from "../components/slider/slider";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const LandingPage = () => {
   return (
     <div>
       <Header />
+      <Slider/>
       <Carousel />
       <ProductList />
     </div>
