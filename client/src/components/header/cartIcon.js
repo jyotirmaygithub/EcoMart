@@ -13,7 +13,7 @@ const CartIcon = () => {
       <span className="cartIcon">
         <ShoppingCartIcon sx={{ fontSize: 24 }} className="icon" />
         {cartItems.length > 0 && (
-          <span className="text-yellow-800">{cartItems.length}</span>
+          <span className="text-white absolute top-[20px]">{cartItems.length}</span>
         )}
       </span>
     </div>
