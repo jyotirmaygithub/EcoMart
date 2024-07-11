@@ -41,7 +41,6 @@ export function login(email, password) {
       
       const data = await response.json();
 
-      console.log("response =", data);
 
       if (response.ok) {
         storeAuthToken(data);
@@ -63,8 +62,6 @@ export function signUp(name, email, password) {
   return async function (dispatch) {
     try {
       dispatch({ type: REGISTER_USER_REQUEST });
-      console.log("process = ", process.env.REACT_APP_DEV_URL);
-      console.log("name = ", name);
 
       const response = await fetch(
         `${process.env.REACT_APP_DEV_URL}/api/auth/newuser`,
@@ -77,7 +74,6 @@ export function signUp(name, email, password) {
         }
       );
       const data = await response.json();
-      console.log("resposne =", data);
 
       if (response.ok) {
         storeAuthToken(data)
@@ -128,7 +124,6 @@ export function fetchUserDetails() {
       }
 
       const userData = await response.json();
-      console.log("userdata response  = ", userData);
 
       dispatch({
         type: AUTHENTICATED_USER_REQUEST_SUCCESS,

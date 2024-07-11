@@ -32,7 +32,6 @@ export function addItemToCart(
       }
       // Get authToken again after dispatch
       const { authToken } = getState().auth;
-      console.log("authToken = ", authToken);
 
       // Now use the authToken in the fetch request
       const response = await fetch(
@@ -57,7 +56,6 @@ export function addItemToCart(
       }
 
       const product = await response.json();
-      console.log("response = ", product);
 
       dispatch({
         type: ADD_ITEM_TO_CART_SUCCESS,
@@ -90,7 +88,6 @@ export const retrieveCartItems = () => {
 
       // Get authToken again after dispatch
       const { authToken } = getState().auth;
-      console.log("authToken = ", authToken);
 
       // Now use the authToken in the fetch request
       const response = await fetch(
@@ -108,7 +105,6 @@ export const retrieveCartItems = () => {
       }
 
       const cartData = await response.json();
-      console.log("response = ", cartData.data);
 
       dispatch({
         type: RETRIEVE_CART_ITEMS_SUCCESS,
@@ -126,7 +122,6 @@ export const retrieveCartItems = () => {
 
 // to remove a item from the cart
 export const removeItemFromCart = (productId) => {
-  console.log("product id = ",productId)
   return async (dispatch, getState) => {
     try {
       // Get authToken from redux state
@@ -155,7 +150,6 @@ export const removeItemFromCart = (productId) => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      console.log("response product id =",response)
       dispatch({
         type: REMOVE_ITEM_FROM_CART,
         payload: productId,
