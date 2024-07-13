@@ -158,7 +158,7 @@ const Payment = () => {
             cartlength={cartItems.length}
             totalPrice={originalPrice}
             totalDiscount={totalDiscount}
-            totalprice={finalPrice}
+            finalPrice={finalPrice}
           />
         </div>
       </div>

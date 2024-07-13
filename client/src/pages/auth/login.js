@@ -178,7 +178,7 @@ export default function Login() {
                 }}
                 disabled={isSignInDisabled}
               >
-                {loading ? <CircularLoader /> : "Sign In"}
+                {loading ? <CircularLoader  size={30} color={"white"}/> : "Sign In"}
               </Button>
               <Grid container>
                 <Grid item>

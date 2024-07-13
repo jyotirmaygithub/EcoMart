@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "@mui/material";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -36,11 +37,7 @@ const ContactForm = () => {
         }
       );
 
-      if (response.ok) {
-        toast.success("Message sent successfully!");
-      } else {
-        toast.error("Failed to send message. Please try again later.");
-      }
+      toast.success("Message has been recieved , contact you shortly.");
     } catch (error) {
       console.error("Error sending message:", error);
       toast.error("An error occurred while sending the message.");
@@ -97,17 +94,31 @@ const ContactForm = () => {
 
         <div className="flex flex-col sm:flex-row gap-4 mb-4">
           <a href="#issue-select">
-            <button className="bg-gray-900 text-white px-6 py-2 rounded hover:bg-red-600">
+            <Button
+              sx={{
+                bgcolor: "#F1C40F",
+                color: "white",
+                "&:hover": {
+                  bgcolor: "#F1C40F",
+                },
+              }}
+            >
               Support Form
-            </button>
+            </Button>
           </a>
 
-          <button
-            className="bg-gray-900 text-white px-6 py-2 rounded hover:bg-red-600"
+          <Button
+            sx={{
+              bgcolor: "#F1C40F",
+              color: "white",
+              "&:hover": {
+                bgcolor: "#F1C40F",
+              },
+            }}
             onClick={handleCall}
           >
             Call Us
-          </button>
+          </Button>
         </div>
 
         <hr className="bg-gray-300 my-4" />
@@ -223,12 +234,19 @@ const ContactForm = () => {
               />
             </div>
 
-            <button
+            <Button
               type="submit"
-              className="bg-gray-900 text-white px-6 py-3 rounded hover:bg-red-600"
+              sx={{
+                bgcolor: "#F1C40F",
+                color: "white",
+                borderRadius: "20px",
+                "&:hover": {
+                  bgcolor: "#F1C40F",
+                },
+              }}
             >
               Submit
-            </button>
+            </Button>
           </form>
         </div>
       </div>

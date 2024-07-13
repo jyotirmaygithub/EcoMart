@@ -26,6 +26,7 @@ import { getProductDetails } from "../../../actions/productAction";
 import { uploadImage } from "../../../actions/imageAction";
 import { updateProductDetails } from "../../../actions/productAction";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function UpdateProduct() {
   const UploadContainer = styled("div")({
@@ -123,7 +124,9 @@ function UpdateProduct() {
           savings,
           inclusiveOfTaxes
         )
-      ); // Example action, replace with your actual update action
+      ).then(() => {
+        toast.success("Product has been updated");
+      });
     } catch (error) {
       console.error("Error uploading images:", error);
     }
@@ -282,10 +285,7 @@ function UpdateProduct() {
                 </Grid>
                 {loader ? (
                   <div className="flex items-center justify-center">
-                    <Circle
-                      size={70}
-                      color={"yellow"}
-                    />
+                    <Circle size={70} color={"yellow"} />
                   </div>
                 ) : (
                   <Box mt={2} mb={2} className="w-full">

@@ -25,8 +25,8 @@ const Shipping = () => {
   const [country, setCountry] = React.useState("");
   const [phoneNo, setPhone] = React.useState("");
   const [email, setEmail] = React.useState("");
-  const [ setSaveAddress] = React.useState(false);
-  const [ setSameBillingDelivery] = React.useState(false);
+  const [setSaveAddress] = React.useState(false);
+  const [setSameBillingDelivery] = React.useState(false);
   const [isValidEmail, setIsValidEmail] = React.useState(true);
   const [isPhoneNoValid, setIsPhoneNoValid] = React.useState(true);
 
@@ -244,7 +244,7 @@ const Shipping = () => {
                           htmlFor="default-checkbox"
                           className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
-                          "My billing and delivery information are the same.
+                          My billing and delivery information are the same.
                         </label>
                       </Grid>
                       <Grid item xs={12}>
