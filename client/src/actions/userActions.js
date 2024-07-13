@@ -91,7 +91,6 @@ export function signUp(name, email, password) {
 }
 
 export function fetchUserDetails() {
-  console.log("fetch user details functions")
   return async function (dispatch, getState) {
     try {
       dispatch({
@@ -156,7 +155,6 @@ export function totalUsers() {
       }
 
       const userData = await response.json();
-      console.log("userdata response  = ", userData);
 
       dispatch({
         type: TOTAL_NUMBER_USER_REQUEST_SUCCESS,

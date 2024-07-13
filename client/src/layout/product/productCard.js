@@ -7,23 +7,21 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { getProductDetails } from "../../actions/productAction";
+import FreeShippingIcon from "@mui/icons-material/LocalShipping";
+import StarShowCase from "../../utils/star";
 import {
   dispalyMoney,
   generateDiscountedPrice,
 } from "../../components/DisplayMoney/displayMoney";
+import { getProductDetails } from "../../actions/productAction";
 import nlp from "compromise";
-import StarShowCase from "../../utils/star";
-import FreeShippingIcon from "@mui/icons-material/LocalShipping";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  console.log("rating =", product.ratings);
-
+  
   let discountPrice = generateDiscountedPrice(product.price);
   discountPrice = dispalyMoney(discountPrice);
   const oldPrice = dispalyMoney(product.price);

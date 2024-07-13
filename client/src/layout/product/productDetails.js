@@ -4,28 +4,29 @@ import AddIcon from "@mui/icons-material/Add";
 import { IconButton, Input, Button } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
-import { useSelector, useDispatch } from "react-redux";
-import { getProductDetails } from "../../actions/productAction";
-import { addItemToCart, retrieveCartItems } from "../../actions/cartAction";
-import { toast } from "react-toastify";
-import nlp from "compromise";
+import FreeShippingIcon from "@mui/icons-material/LocalShipping";
 import GitLoader from "../../layout/loader/gitLoader";
 import Star from "../../utils/star";
-import FreeShippingIcon from "@mui/icons-material/LocalShipping";
-import { generateDiscountedPrice, calculateDiscount, dispalyMoney } from "../../components/DisplayMoney/displayMoney";
-import { useParams } from "react-router-dom";
+import {
+  dispalyMoney,
+} from "../../components/DisplayMoney/displayMoney";
+import { getProductDetails } from "../../actions/productAction";
+import { addItemToCart, retrieveCartItems } from "../../actions/cartAction";
+import { checkCookie } from "../../actions/authAction";
 import "./ProductDetails.css";
+import nlp from "compromise";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [quantity, setQuantity] = useState(1);
   const [previewImg, setPreviewImg] = useState("");
 
-  const { product, loading } = useSelector(
-    (state) => state.productDetails
-  );
+  const { product, loading } = useSelector((state) => state.productDetails);
 
   useEffect(() => {
     dispatch(getProductDetails(id));
@@ -45,20 +46,29 @@ const ProductDetails = () => {
     return keywordDescription;
   };
 
-  const truncatedDescription = product ? extractKeyFeatures(product.description) : "";
+  const truncatedDescription = product
+    ? extractKeyFeatures(product.description)
+    : "";
 
-  const handleAddItem = () => {
-    dispatch(retrieveCartItems());
-    dispatch(
-      addItemToCart(
-        id,
-        quantity,
-        product.name,
-        product.price,
-        product.images[0]
-      )
-    );
-  };
+    const handleAddItem = () => {
+      if (dispatch(checkCookie())) {
+        dispatch(
+          addItemToCart(
+            id,
+            quantity,
+            product.name,
+            product.price,
+            product.images[0]
+          )
+        ).then(() => {
+          // After adding item to cart, retrieve updated cart items
+          dispatch(retrieveCartItems());
+        });
+      } else {
+        navigate("/login");
+      }
+    };
+    
 
   const handlePreviewImg = (images, i) => {
     setPreviewImg(images[i]);
@@ -148,7 +158,9 @@ const ProductDetails = () => {
                     <div className="prod_details_offers">
                       <h4>Offers and Discounts</h4>
                       <ul className="font-bold">
-                        <li className="font-bold">No Cost EMI on Credit Card</li>
+                        <li className="font-bold">
+                          No Cost EMI on Credit Card
+                        </li>
                         <li>Pay Later & Avail Cashback</li>
                       </ul>
                     </div>
@@ -169,9 +181,7 @@ const ProductDetails = () => {
                         value={quantity}
                         className="input"
                       />
-                      <IconButton
-                        onClick={increaseQuantityHandler}
-                      >
+                      <IconButton onClick={increaseQuantityHandler}>
                         <AddIcon sx={{ color: "black" }} />
                       </IconButton>
                     </div>

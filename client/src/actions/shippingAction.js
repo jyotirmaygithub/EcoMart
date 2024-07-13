@@ -15,7 +15,6 @@ export const saveShippingInfo =
     lastName
   ) =>
   async (dispatch, getState) => {
-    console.log("is it workign ")
     dispatch({ type: types.SAVE_SHIPPING_INFO_REQUEST });
 
     // Get authToken from redux state
@@ -61,3 +60,54 @@ export const saveShippingInfo =
       });
     }
   };
+
+
+  // export const retrieveAddress = () => {
+  //   return async (dispatch, getState) => {
+  //     try {
+  //       dispatch({
+  //         type: RETRIEVE_ORDERS_REQUEST,
+  //       });
+  
+  //       // Get authToken from redux state
+  //       const { authToken: currentAuthToken } = getState().auth;
+  
+  //       // If authToken is not present in redux state, fetch it
+  //       if (!currentAuthToken) {
+  //         await dispatch(getAuthToken()); // Assuming getAuthToken is a thunk action
+  //       }
+  
+  //       // Get authToken again after dispatch
+  //       const { authToken } = getState().auth;
+  
+  //       // Now use the authToken in the fetch request
+  //       const response = await fetch(
+  //         `${process.env.REACT_APP_DEV_URL}/api/retriveData/productOrder`,
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //             "auth-token": authToken,
+  //           },
+  //         }
+  //       );
+  
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! Status: ${response.status}`);
+  //       }
+  
+  //       const ordersData = await response.json();
+  
+  //       dispatch({
+  //         type: RETRIEVE_ORDERS_SUCCESS,
+  //         payload: ordersData.data,
+  //       });
+  //     } catch (error) {
+  //       dispatch({
+  //         type: RETRIEVE_ORDERS_FAIL,
+  //         payload: error.message,
+  //       });
+  //       console.error("Error retrieving orders:", error.message);
+  //     }
+  //   };
+  // };

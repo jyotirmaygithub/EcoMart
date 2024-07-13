@@ -78,7 +78,7 @@ export const productDetailsReducer = (state = initialState2, action) => {
 };
 
 const initialState3 = {
-  loading: false,
+  loading2: false,
   error: null,
 };
 
@@ -87,18 +87,18 @@ export function productUpdateReducer(state = initialState3, action) {
     case PRODUCT_UPDATE_REQUEST:
       return {
         ...state,
-        loading: true,
+        loading2: true,
         error: null,
       };
     case PRODUCT_UPDATE_SUCCESS:
       return {
         ...state,
-        loading: false,
+        loading2: false,
       };
     case PRODUCT_UPDATE_FAIL:
       return {
         ...state,
-        loading: false,
+        loading2: false,
         error: action.payload,
       };
     default:

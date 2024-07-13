@@ -2,27 +2,24 @@ import React, { useState, useEffect } from "react";
 import {
   Avatar,
   Button,
-  Checkbox,
   TextField,
-  FormControlLabel,
-  Grid,
   Typography,
   InputAdornment,
   IconButton,
 } from "@mui/material";
 import Box from "@mui/material/Box";
-import Loader from "../../layout/loader/Loader"
-import { Link, useNavigate } from "react-router-dom";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Copyright from "../../components/copyRight";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+import Copyright from "../../components/copyRight";
+import Loader from "../../layout/loader/Loader"
 import {signUp} from "../../actions/userActions"
+import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 function Signup() {
   const defaultTheme = createTheme();
@@ -39,10 +36,7 @@ function Signup() {
 
   // const [loading, setLoading] = useState(false);
 
-  const [areCheckboxesChecked, setAreCheckboxesChecked] = useState({
-    checkbox1: false,
-    checkbox2: false,
-  });
+
 
   const { loading, isAuthenticated, error } = useSelector((state) => state.userData);
 
@@ -85,12 +79,6 @@ function Signup() {
     setShowPassword(!showPassword);
   };
 
-  const handleCheckboxChange = (checkboxName) => (event) => {
-    setAreCheckboxesChecked((prevState) => ({
-      ...prevState,
-      [checkboxName]: event.target.checked,
-    }));
-  };
 
   let isSignInDisabled = !(
     email &&
@@ -98,24 +86,18 @@ function Signup() {
     isValidEmail &&
     confirmPassword &&
     name &&
-    isValidName &&
-    areCheckboxesChecked.checkbox1 &&
-    areCheckboxesChecked.checkbox2
+    isValidName 
   );
 
   function handleSignUpSubmit(e) {
     e.preventDefault();
-    // setLoading(true);
-    console.log(email, "" , name, " " , password)
 
     if (password !== confirmPassword) {
       toast.error("Password and Confirm Password do not match");
-      // setLoading(false);
       return;
     }
 
     dispatch(signUp(name,email,password));
-    // setLoading(false);
   }
 
   return (
@@ -132,8 +114,12 @@ function Signup() {
               alignItems: "center",
             }}
           >
-            <Avatar className="m-1 bg-secondary">
-              <LockOutlinedIcon />
+            <Avatar sx={{ m: 1, bgcolor: "#F1C40F" }}>
+              <LockOpenIcon
+                sx={{
+                  bgcolor: "#F1C40F",
+                }}
+              />
             </Avatar>
             <Typography variant="h5" component="h1" className="text-center">
               Sign Up for an Account!
@@ -183,7 +169,7 @@ function Signup() {
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton edge="end" onClick={handleShowPasswordClick}>
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                      {showPassword ? <VisibilityOff sx={{ fontSize: 30 }} /> : <Visibility  sx={{ fontSize: 30 }}/>}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -201,7 +187,7 @@ function Signup() {
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton edge="end" onClick={handleShowPasswordClick}>
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                      {showPassword ? <VisibilityOff sx={{ fontSize: 30 }} /> : <Visibility sx={{ fontSize: 30 }} />}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -209,31 +195,6 @@ function Signup() {
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
             />
-            <Grid
-              container
-              className="mt-2"
-              justify="flex-start"
-              alignItems="center"
-            >
-              <Grid item>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label="I Accept The ecommerce Terms & Conditions"
-                  className="mt-1"
-                  checked={areCheckboxesChecked.checkbox1}
-                  onChange={handleCheckboxChange("checkbox1")}
-                />
-              </Grid>
-              <Grid item>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label="I Accept The ecommerce Terms Of Use"
-                  className="mt-1"
-                  checked={areCheckboxesChecked.checkbox2}
-                  onChange={handleCheckboxChange("checkbox2")}
-                />
-              </Grid>
-            </Grid>
 
             <Typography variant="body2" className="mt-2">
               I acknowledge ecommerce will use my information in accordance
@@ -245,7 +206,15 @@ function Signup() {
 
             <Button
               variant="contained"
-              className="mt-3 w-full"
+               fullWidth
+              sx={{
+                my: 3,
+                bgcolor: "#F1C40F",
+                borderRadius: "20px",
+                "&:hover": {
+                  bgcolor: "#F1C40F",
+                },
+              }}
               onClick={handleSignUpSubmit}
               disabled={isSignInDisabled || loading}
             >

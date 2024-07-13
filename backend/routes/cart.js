@@ -31,31 +31,40 @@ router.post("/new-cart-product", fetchUserId, async (req, res) => {
   }
 
   try {
-    // Create a new instance of CartItem model
-    const data = await CartItem.create({
-      productId: productId,
-      title: productName,
-      quantity: productQuantity,
-      price: productPrice,
-      image: productImage,
-      userId: userId,
-    });
+    // Check if the cart item already exists for the given product and user
+    let cartItem = await CartItem.findOne({ productId, userId });
 
-    // Respond with the saved cart item
-    res.status(201).json(data);
+    if (cartItem) {
+      // If cart item exists, update its quantity
+      cartItem.quantity += parseInt(productQuantity); // Assuming productQuantity is a string, parse it to integer
+      await cartItem.save();
+    } else {
+      // If cart item doesn't exist, create a new instance
+      cartItem = await CartItem.create({
+        productId: productId,
+        title: productName,
+        quantity: productQuantity,
+        price: productPrice,
+        image: productImage,
+        userId: userId,
+      });
+    }
+
+    // Respond with the updated or new cart item
+    res.status(201).json(cartItem);
   } catch (error) {
     // Handle any errors that occur during database operation
-    console.error("Error creating cart item:", error.message);
+    console.error("Error creating/updating cart item:", error.message);
     res.status(500).json({ error: "Internal Server Error" }); // General error message for security
   }
 });
+
 
 router.delete(
   "/remove-cart-product/:productId",
   fetchUserId,
   async (req, res) => {
     const { productId } = req.params;
-    console.log("product id =", productId);
 
     // Check if userId is correctly set by fetchUserId middleware
     const userId = req.userId;
@@ -74,7 +83,6 @@ router.delete(
         productId: productId,
         userId: userId,
       });
-      console.log("cart item = ", cartItem);
       if (!cartItem) {
         return res.status(404).json({ error: "Cart item not found" });
       }

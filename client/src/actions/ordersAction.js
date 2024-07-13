@@ -2,7 +2,6 @@ import { RETRIEVE_ORDERS_REQUEST, RETRIEVE_ORDERS_SUCCESS, RETRIEVE_ORDERS_FAIL 
 import { getAuthToken } from "./authAction";
 
 export const placeOrder = (orders) => async (dispatch, getState) => {
-  console.log("orders =", orders);
 
   const { authToken: currentAuthToken } = getState().auth;
 
@@ -13,20 +12,16 @@ export const placeOrder = (orders) => async (dispatch, getState) => {
   // Get authToken again after dispatch
   const { authToken } = getState().auth;
 
-  // Log the API URL and authToken for debugging
-  console.log("API URL:", process.env.REACT_APP_DEV_URL);
-  console.log("authToken:", authToken);
-
   try {
     const response = await fetch(
-      `${process.env.REACT_APP_DEV_URL}/api/orders/productOrder`,
+      `${process.env.REACT_APP_DEV_URL}/api/order/productOrder`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "auth-token": authToken,
         },
-        body: JSON.stringify(orders),
+        body: JSON.stringify({orders}),
       }
     );
 

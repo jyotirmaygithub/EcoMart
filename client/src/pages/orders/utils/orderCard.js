@@ -1,25 +1,13 @@
 import React, { useEffect } from "react";
 import { Card, Typography, Divider, useMediaQuery } from "@mui/material";
 import { styled } from "@mui/system";
-import { useDispatch, useSelector } from "react-redux";
 import { retrieveOrders } from "../../../actions/ordersAction";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const Root = styled("div")(({ theme }) => ({
   padding: "1rem",
 }));
 
-const OrderCardContainer = styled(Card)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
-  borderRadius: 2,
-  boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
-  transition: "box-shadow 0.3s ease-in-out",
-  "&:hover": {
-    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
-  },
-}));
 
 const FirstBlock = styled("div")(({ theme }) => ({
   height: "fit-content",
@@ -60,16 +48,6 @@ const ProductContainer = styled("div")({
   padding: "1rem 0rem",
 });
 
-const ProductCard = styled("div")({
-  maxWidth: "300px",
-  borderRadius: "8px",
-  overflow: "hidden",
-  boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
-  padding: "1rem",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-});
 
 const OrderCard = () => {
   const { orders } = useSelector((state) => state.orders);

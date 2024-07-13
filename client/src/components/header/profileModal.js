@@ -13,31 +13,40 @@ import {
   ContactSupport,
   Info,
   Logout,
-  Person2Outlined,
   ShoppingCartOutlined,
   MenuOutlined,
   AdminPanelSettingsOutlined,
   AddBoxOutlined,
-  EditOutlined,
-  DeleteOutlined,
 } from "@mui/icons-material";
+import { checkCookie, deleteAuthToken } from "../../actions/authAction";
+import {  clearCart} from "../../actions/cartAction";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function AnchorTemporaryDrawer() {
   const { user } = useSelector((state) => state.userData);
   const navigate = useNavigate();
   const [state, setState] = React.useState({});
+  const dispatch = useDispatch()
 
   React.useEffect(() => {}, [user]);
 
   const toggleDrawer = (anchor, open) => (event) => {
-    setState({ ...state, [anchor]: open });
+    if(dispatch(checkCookie())){
+      setState({ ...state, [anchor]: open });
+    }
+    else{
+      navigate("/login")
+    }
   };
 
   const handleClick = (value) => {
     if (value === "Logout") {
-      navigate(`/login`);
+      dispatch(deleteAuthToken())
+      dispatch(clearCart());
+      navigate(`/`);
+      toast.success("Logout Successfully");
     } else {
       navigate(`/${value.toLowerCase().replace(" ", "-")}`);
     }
@@ -59,27 +68,22 @@ export default function AnchorTemporaryDrawer() {
 
     return false;
   };
-  console.log(user.user_data && user.user_data.picture)
+
+  // Define the icon color
+  const iconColor = { color: "#F1C40F" };
 
   const icons = {
-    "View Profile": <Person2Outlined />,
-    Orders: <ShoppingCartOutlined />,
-    About: <Info />,
-    Contact: <ContactSupport />,
-    Logout: <Logout />,
-    "View Admin": <AdminPanelSettingsOutlined />,
-    "New Product": <AddBoxOutlined />,
-    "Update Product": <EditOutlined />,
-    "Delete Product": <DeleteOutlined />,
+    "View Admin": <AdminPanelSettingsOutlined sx={iconColor} />,
+    "View Products": <AddBoxOutlined sx={iconColor} />,
+    Cart: <ShoppingCartOutlined sx={iconColor} />,
+    Orders: <ShoppingCartOutlined sx={iconColor} />,
+    About: <Info sx={iconColor} />,
+    Contact: <ContactSupport sx={iconColor} />,
+    Logout: <Logout sx={iconColor} />,
   };
 
-  const userOptions = ["View Profile", "Orders"];
-  const adminOptions = [
-    "View Admin",
-    "New Product",
-    "Update Product",
-    "Delete Product",
-  ];
+  const userOptions = ["Cart", "Orders"];
+  const adminOptions = ["View Admin", "View Products"];
 
   const list = (anchor) => (
     <Box

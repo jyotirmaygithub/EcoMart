@@ -7,6 +7,7 @@ import {
   RETRIEVE_CART_ITEMS_SUCCESS,
   RETRIEVE_CART_ITEMS_FAIL,
   REMOVE_ITEM_FROM_CART,
+  CLEAR_CART
 } from "../constants/cartConstants";
 import { getAuthToken } from "./authAction";
 
@@ -23,14 +24,10 @@ export function addItemToCart(
         type: ADD_ITEM_TO_CART_REQUEST,
       });
 
-      // Get authToken from redux state
-      const { authToken: currentAuthToken } = getState().auth;
+      // Always fetch the authToken
+      await dispatch(getAuthToken()); // Assuming getAuthToken is a thunk action
 
-      // If authToken is not present in redux state, fetch it
-      if (!currentAuthToken) {
-        await dispatch(getAuthToken()); // Assuming getAuthToken is a thunk action
-      }
-      // Get authToken again after dispatch
+      // Get authToken after dispatch
       const { authToken } = getState().auth;
 
       // Now use the authToken in the fetch request
@@ -78,15 +75,10 @@ export const retrieveCartItems = () => {
         type: RETRIEVE_CART_ITEMS_REQUEST,
       });
 
-      // Get authToken from redux state
-      const { authToken: currentAuthToken } = getState().auth;
+      // Always fetch the authToken
+      await dispatch(getAuthToken()); // Assuming getAuthToken is a thunk action
 
-      // If authToken is not present in redux state, fetch it
-      if (!currentAuthToken) {
-        await dispatch(getAuthToken()); // Assuming getAuthToken is a thunk action
-      }
-
-      // Get authToken again after dispatch
+      // Get authToken after dispatch
       const { authToken } = getState().auth;
 
       // Now use the authToken in the fetch request
@@ -120,19 +112,14 @@ export const retrieveCartItems = () => {
   };
 };
 
-// to remove a item from the cart
+// to remove an item from the cart
 export const removeItemFromCart = (productId) => {
   return async (dispatch, getState) => {
     try {
-      // Get authToken from redux state
-      const { authToken: currentAuthToken } = getState().auth;
+      // Always fetch the authToken
+      await dispatch(getAuthToken()); // Assuming getAuthToken is a thunk action
 
-      // If authToken is not present in redux state, fetch it
-      if (!currentAuthToken) {
-        await dispatch(getAuthToken()); // Assuming getAuthToken is a thunk action
-      }
-
-      // Get authToken again after dispatch
+      // Get authToken after dispatch
       const { authToken } = getState().auth;
 
       // Now use the authToken in the fetch request
@@ -159,3 +146,13 @@ export const removeItemFromCart = (productId) => {
     }
   };
 };
+
+
+export const clearCart = () => {
+  return (dispatch) => {
+    dispatch({
+      type: CLEAR_CART,
+    });
+  };
+};
+

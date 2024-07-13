@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../../actions/productAction";
 import ProductLayout from "../../layout/product/productCard";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductList = () => {
   const dispatch = useDispatch();
 
-  const { products, loading, error } = useSelector((state) => state.products);
+  const { products } = useSelector((state) => state.products);
 
   useEffect(() => {
     dispatch(getProduct());

@@ -4,12 +4,12 @@ import { Facebook, Twitter, Instagram } from '@mui/icons-material';
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-800 text-gray-300 py-20">
+        <footer className="bg-gray-800 text-gray-300 py-10 md:py-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Footer Content */}
-                <div className="flex flex-wrap justify-center gap-y-8 md:justify-between md:flex-row">
+                <div className="flex flex-wrap justify-center gap-y-8 md:justify-between">
                     {/* Column 1 */}
-                    <div className="mb-8 md:mb-0">
+                    <div className="w-full md:w-auto mb-8 md:mb-0 px-4 sm:px-6 lg:px-8">
                         <h3 className="text-lg font-semibold mb-4">Get to Know Us</h3>
                         <ul className='ml-0'>
                             <li><Link to="#" className="block hover:text-white">Careers</Link></li>
@@ -20,7 +20,7 @@ const Footer = () => {
                     </div>
 
                     {/* Column 2 */}
-                    <div className="mb-8 md:mb-0">
+                    <div className="w-full md:w-auto mb-8 md:mb-0 px-4 sm:px-6 lg:px-8">
                         <h3 className="text-lg font-semibold mb-4">Make Money with Us</h3>
                         <ul className='ml-0'>
                             <li><Link to="#" className="block hover:text-white">Sell products on EcoMart</Link></li>
@@ -31,7 +31,7 @@ const Footer = () => {
                     </div>
 
                     {/* Column 3 */}
-                    <div className="mb-8 md:mb-0">
+                    <div className="w-full md:w-auto mb-8 md:mb-0 px-4 sm:px-6 lg:px-8">
                         <h3 className="text-lg font-semibold mb-4">EcoMart Payment Products</h3>
                         <ul className='ml-0'>
                             <li><Link to="#" className="block hover:text-white">EcoMart Business Card</Link></li>
@@ -42,7 +42,7 @@ const Footer = () => {
                     </div>
 
                     {/* Column 4 */}
-                    <div>
+                    <div className="w-full md:w-auto mb-8 md:mb-0 px-4 sm:px-6 lg:px-8">
                         <h3 className="text-lg font-semibold mb-4">Let Us Help You</h3>
                         <ul className='ml-0'>
                             <li><Link to="#" className="block hover:text-white">EcoMart and COVID-19</Link></li>

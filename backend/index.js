@@ -21,7 +21,7 @@ app.use("/api/retriveData" ,require("./routes/retriveData"))
 app.use("/api/cart", require("./routes/cart"));
 app.use("/api/update" , require("./routes/update"))
 app.use("/api/delete" , require("./routes/delete"))
-// app.use("/api/nodemailer", require("./routes/nodemailer"))
+app.use("/api/order" , require("./routes/order"))
 
 app.listen(port, () => {
   console.log(`ecommerc-backend is working on port number :  ${port}`);

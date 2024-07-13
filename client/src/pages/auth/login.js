@@ -14,13 +14,13 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Copyright from "../../components/copyRight";
+import CircularLoader from "../../layout/loader/Loader";
+import { toast } from "react-toastify";
+import { login } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../actions/userActions";
-import Copyright from "../../components/copyRight";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { toast } from "react-toastify";
-import CircularLoader from "../../layout/loader/Loader";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -83,8 +83,12 @@ export default function Login() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOpenIcon sx={{ fontSize: 40 }} />
+            <Avatar sx={{ m: 1, bgcolor: "#F1C40F" }}>
+              <LockOpenIcon
+                sx={{
+                  bgcolor: "#F1C40F",
+                }}
+              />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in to Your Account
@@ -131,8 +135,13 @@ export default function Login() {
                   ),
                 }}
               />
-              <Typography variant="body2" color="textSecondary" align="center" mt={2}>
-                By signing in, you accept the Cricket Weapon{" "}
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                align="center"
+                mt={2}
+              >
+                By signing in, you accept the EcoMart{" "}
                 <MuiLink
                   href="#"
                   onClick={(event) => {
@@ -142,7 +151,8 @@ export default function Login() {
                 >
                   Terms of Use
                 </MuiLink>{" "}
-                and acknowledge Cricket Weapon will use your information in accordance with its{" "}
+                and acknowledge EcoMart will use your information in
+                accordance with its{" "}
                 <MuiLink
                   href="#"
                   onClick={(event) => {
@@ -158,14 +168,25 @@ export default function Login() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{
+                  my: 3,
+                  bgcolor: "#F1C40F",
+                  borderRadius: "20px",
+                  "&:hover": {
+                    bgcolor: "#F1C40F",
+                  },
+                }}
                 disabled={isSignInDisabled}
               >
                 {loading ? <CircularLoader /> : "Sign In"}
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link to="/signup" variant="body2" className="hover:underline">
+                  <Link
+                    to="/signup"
+                    variant="body2"
+                    className="hover:underline"
+                  >
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

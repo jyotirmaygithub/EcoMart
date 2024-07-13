@@ -5,14 +5,12 @@ const Orders = require("../models/orders");
 
 router.post("/productOrder", fetchUserId, async (req, res) => {
   const { orders } = req.body;
-  console.log("orders = ",orders)
 
   // Check if userId is correctly set by fetchUserId middleware
   const userId = req.userId;
   if (!userId) {
     return res.status(400).json({ error: "User ID is required" });
   }
-  console.log("orders = ",orders)
   try {
     // Create a new instance of Orders model
     await Orders.create({

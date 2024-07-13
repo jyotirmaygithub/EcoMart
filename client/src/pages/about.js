@@ -1,14 +1,11 @@
 import React from "react";
 import { Typography, Container, Grid, Button } from "@mui/material";
-// import MetaData from "../component/layouts/MataData/MataData";
-// import TermsImage from "../Image/about/tc.jpg";
 import { Link } from "react-router-dom";
 
 const About_UsPage = () => {
   return (
     <>
       <div className="pt-32 pb-16 bg-white w-full flex flex-col justify-center items-center">
-        {/* <MetaData title={"About Us"} /> */}
         <Container className="p-8 text-center bg-white max-w-full">
           <Grid container spacing={4} justifyContent="center">
             <Grid item xs={12} sm={6}>

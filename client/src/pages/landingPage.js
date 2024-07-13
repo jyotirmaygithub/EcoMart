@@ -3,26 +3,30 @@ import Header from "../components/header/header";
 import Carousel from "../components/Carousel/carousel";
 import ProductList from "../components/products/products";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserDetails } from "../actions/userActions";
+import { getProduct } from "../actions/productAction";
 import Slider from "../components/slider/slider";
+import Footer from "../components/footer";
+import GitLoader from "../layout/loader/gitLoader";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.products);
 
-  // const {authToken, } = useSelector((state) => state.auth)
-  // console.log("i find = ",authToken)
   useEffect(() => {
-    console.log("things are working")
-    // Add any dispatch actions here if needed, for example:
-    dispatch(fetchUserDetails());
-  }, [dispatch]);
+    dispatch(getProduct());
+  }, []);
 
   return (
     <div>
       <Header />
-      <Slider/>
-      <Carousel />
-      <ProductList />
+      {products.data ? (
+        <>
+          <Slider />
+          <Carousel />
+          <ProductList />
+        </>
+      ) : <GitLoader />}
+      <Footer />
     </div>
   );
 };

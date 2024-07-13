@@ -26,7 +26,6 @@ export const uploadImage = (image) => async (dispatch) => {
     }
 
     const cloudData = await res.json();
-    console.log("cloud images url = ", cloudData);
     dispatch({ type: IMAGE_UPLOAD_SUCCESS, payload: cloudData.url });
 
     return cloudData.url;

@@ -1,42 +1,44 @@
-import React from 'react';
-import { Box, Typography } from '@mui/material';
-import { styled } from '@mui/system';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import { dispalyMoney } from '../components/DisplayMoney/displayMoney';
+import React from "react";
 
-const StyledCard = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(3),
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Soft shadow
-  border: '1px solid #e1e1e1', // Light border
-  maxWidth: 300,
-  margin: 'auto',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-}));
-
-const TotalBox = ({ totalQuantity, totalPrice }) => {
-  const price = dispalyMoney(totalPrice)
+const TotalBox = ({ cartlength, totalPrice, totalDiscount }) => {
   return (
-    <StyledCard className='space-y-4'>
-      <ShoppingCartIcon style={{ fontSize: 60, color: '#F1C40F' }} />
-      <Typography variant="h5" gutterBottom>
-        Payment Summary
-      </Typography>
-      <Box style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem' }}>
-        <MonetizationOnIcon style={{ marginRight: '0.5rem', color: 'brown' }} />
-        <Typography variant="body1">
-          Total Quantity: {totalQuantity}
-        </Typography>
-      </Box>
-      <Box style={{ display: 'flex', alignItems: 'center' }}>
-        <MonetizationOnIcon style={{ marginRight: '0.5rem', color: 'green' }} />
-        <Typography variant="body1">
-          Total Price: {price}
-        </Typography>
-      </Box>
-    </StyledCard>
+    <div className="space-y-5 w-full">
+      <div className="bg-white rounded-lg shadow-md p-5">
+        <h4 className="text-lg font-semibold">
+          Order Summary &nbsp; {cartlength} ({cartlength > 1 ? "items" : "item"})
+        </h4>
+        <div className="space-y-3 mt-4">
+          <div className="flex justify-between items-center">
+            <span className="font-medium">Original Price</span>
+            <p className="font-medium">{totalPrice}</p>
+          </div>
+
+          <div className="flex justify-between items-center">
+            <span className="font-medium">Discount</span>
+            <p className="font-medium">
+              <del>{totalDiscount}</del>
+            </p>
+          </div>
+
+          <div className="flex justify-between items-center">
+            <span className="font-medium">Delivery</span>
+            <p className="font-medium">
+              <b>Free</b>
+            </p>
+          </div>
+
+          <hr className="border-t" />
+
+          <div className="flex justify-between items-center">
+            <div>
+              <h4 className="text-lg font-semibold">Total Price</h4>
+              <p className="text-sm text-gray-500">(Inclusive of all taxes)</p>
+            </div>
+            <p className="text-lg font-semibold">{totalPrice}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

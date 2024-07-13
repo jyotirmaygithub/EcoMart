@@ -31,7 +31,7 @@ const categories = [
 
 const CategorySlider = () => {
   return (
-    <div className="px-2 my-5 mt-28">
+    <div className="px-2 my-5 mt-32 ">
       <TableContainer style={{ overflowX: 'auto', display: 'flex' }}>
         <Table style={{ minWidth: '600px' }}>
           <TableBody>

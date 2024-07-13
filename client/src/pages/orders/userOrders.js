@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Avatar, Box, Typography } from "@mui/material";
+import {  Box, Typography } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 import { useDispatch, useSelector } from "react-redux";
 import { retrieveOrders } from "../../actions/ordersAction";

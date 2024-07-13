@@ -11,7 +11,7 @@ export default function copyright(props) {
         {...props}
       >
         {"Copyright © "}
-        Ecommerce {new Date().getFullYear()}
+        EcoMart {new Date().getFullYear()}
         {"."}
       </Typography>
     </div>
