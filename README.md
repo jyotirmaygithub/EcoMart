@@ -35,6 +35,7 @@ Welcome to Ecomart, an e-commerce shopping app built using the MERN (MongoDB, Ex
 - **Additional Libraries**: Compromise (NLP), React-Toastify, React-Awesome-Slider, React-Confetti
 
 ## Demo Credentials (to get admin access)
+ Please navigate to the login section and use the following credentials to gain admin access. If you are already logged in, please log out first and then use these credentials.
 
 - **Email (Admin)**: jyotirmay2000gupta@gmail.com
 - **Password**: 22812410
@@ -42,7 +43,14 @@ Welcome to Ecomart, an e-commerce shopping app built using the MERN (MongoDB, Ex
 ## Environment Variables
 
 ### backend/.env
-
+- **ECOMMERCE_JWT_SECRET**: "your_jwt_secret"
+- **CLOUD_NAME**: "your_cloud_name"
+- **CLOUD_API_KEY**: "your_cloud_api_key"
+- **CLOUD_API_SECRET**: "your_cloud_api_secret"
+- **PASSWORD_STRING**: "your_password_string"
+- **MYEMAIL**: "your_email"
+- **MY_PASSWORD**: "your_password"
+- **REACT_APP_MONGO_URL**: "your_mongodb_url"
 
 ## Routes
 
@@ -50,28 +58,36 @@ Here's an outline of the routes typically used in a MERN stack e-commerce applic
 
 ### Authentication
 
-- `POST /api/auth/register` - Register a new user.
-- `POST /api/auth/login` - Login user and generate JWT token.
 - `GET /api/auth/signin` - To register new user.
+- `POST /api/auth/login` - Login user and generate JWT token.
+- `POST /api/auth/user-data` - To fetch user details.
 
 ### Product Management
 
-- `GET /api/products` - Fetch all products.
-- `GET /api/products/:id` - Fetch a specific product by ID.
-- `PUT /api/products/:id` - Update a product by ID (Admin only).
-- `DELETE /api/products/:id` - Delete a product by ID (Admin only).
+- `GET /api/retriveData/products-data` - Fetch all products.
+- `GET /api/retriveData/single-product/:id` - Fetch a specific product by ID.
+- `PUT /api/update/update-product/:id` - Update a product by ID (Admin only).
+- `DELETE /api/delete/delete-product/:id` - Delete a product by ID (Admin only).
 
 ### Cart Management
 
-- `GET /api/cart` - Fetch current user's cart items.
-- `POST /api/cart/add` - Add a product to the cart.
-- `DELETE /api/cart/remove/:id` - Remove a product from the cart.
+- `GET /api/retriveData/cart-products` - Fetch current user's cart items.
+- `POST /api/cart/new-cart-product` - Add a product to the cart.
+- `DELETE /api/cart/remove-cart-product/:productId` - Remove a product from the cart.
 
 ### Order Management
 
 - `GET /api/orders` - Fetch all orders (Admin only).
-- `GET /api/orders/:id` - Fetch a specific order by ID.
-- `POST /api/orders/create` - Create a new order.
+- `GET /api/retriveData/productOrder` - Fetch a specific order by user.
+- `POST /api/order/productOrder` - Create a new order.
+
+### Image Management
+
+- `POST `-- cloudinary api.
+
+### Address Management
+
+- `POST  /api/shipping/save` - To save the address of the placed order.
 
 ## Installation
 
