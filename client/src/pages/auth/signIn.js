@@ -15,8 +15,8 @@ import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Copyright from "../../components/copyRight";
-import Loader from "../../layout/loader/Loader"
-import {signUp} from "../../actions/userActions"
+import Loader from "../../layout/loader/Loader";
+import { signUp } from "../../actions/userActions";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,12 +34,9 @@ function Signup() {
   const [isValidName, setIsValidName] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
 
-  // const [loading, setLoading] = useState(false);
-
-
-
-  const { loading, isAuthenticated, error } = useSelector((state) => state.userData);
-
+  const { loading, isAuthenticated, error } = useSelector(
+    (state) => state.userData
+  );
 
   useEffect(() => {
     if (error) {
@@ -79,14 +76,13 @@ function Signup() {
     setShowPassword(!showPassword);
   };
 
-
   let isSignInDisabled = !(
     email &&
     password &&
     isValidEmail &&
     confirmPassword &&
     name &&
-    isValidName 
+    isValidName
   );
 
   function handleSignUpSubmit(e) {
@@ -97,7 +93,7 @@ function Signup() {
       return;
     }
 
-    dispatch(signUp(name,email,password));
+    dispatch(signUp(name, email, password));
   }
 
   return (
@@ -106,6 +102,8 @@ function Signup() {
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box
+            component="form"
+            onSubmit={handleSignUpSubmit}
             className="space-y-4"
             sx={{
               marginTop: 2,
@@ -169,7 +167,11 @@ function Signup() {
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton edge="end" onClick={handleShowPasswordClick}>
-                      {showPassword ? <VisibilityOff sx={{ fontSize: 30 }} /> : <Visibility  sx={{ fontSize: 30 }}/>}
+                      {showPassword ? (
+                        <VisibilityOff sx={{ fontSize: 30 }} />
+                      ) : (
+                        <Visibility sx={{ fontSize: 30 }} />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -187,7 +189,11 @@ function Signup() {
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton edge="end" onClick={handleShowPasswordClick}>
-                      {showPassword ? <VisibilityOff sx={{ fontSize: 30 }} /> : <Visibility sx={{ fontSize: 30 }} />}
+                      {showPassword ? (
+                        <VisibilityOff sx={{ fontSize: 30 }} />
+                      ) : (
+                        <Visibility sx={{ fontSize: 30 }} />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -199,14 +205,14 @@ function Signup() {
             <Typography variant="body2" className="mt-2">
               I acknowledge ecommerce will use my information in accordance
               with its{" "}
-              <Link href="#" className="text-primary no-underline">
+              <Link to="#" className="text-primary no-underline">
                 Privacy Policy.
               </Link>
             </Typography>
 
             <Button
               variant="contained"
-               fullWidth
+              fullWidth
               sx={{
                 my: 3,
                 bgcolor: "#F1C40F",
@@ -215,10 +221,10 @@ function Signup() {
                   bgcolor: "#F1C40F",
                 },
               }}
-              onClick={handleSignUpSubmit}
+              type="submit"
               disabled={isSignInDisabled || loading}
             >
-             {loading ? <Loader widht={2} /> : <>CREATE ACCOUNT</>}
+              {loading ? <Loader size={30} color={"white"} /> : "CREATE ACCOUNT"}
             </Button>
 
             <Typography
@@ -227,7 +233,10 @@ function Signup() {
               style={{ marginTop: "1rem" }}
             >
               Already have an account?
-              <Link to="/login" className="text-primary no-underline hover:underline">
+              <Link
+                to="/login"
+                className="text-primary no-underline hover:underline"
+              >
                 Login
               </Link>
             </Typography>

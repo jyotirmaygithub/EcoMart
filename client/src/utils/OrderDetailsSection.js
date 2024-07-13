@@ -1,6 +1,6 @@
 import React from "react";
 
-const TotalBox = ({ cartlength, totalPrice, totalDiscount }) => {
+const TotalBox = ({ cartlength,totalPrice, totalDiscount ,finalPrice}) => {
   return (
     <div className="space-y-5 w-full">
       <div className="bg-white rounded-lg shadow-md p-5">
@@ -34,7 +34,7 @@ const TotalBox = ({ cartlength, totalPrice, totalDiscount }) => {
               <h4 className="text-lg font-semibold">Total Price</h4>
               <p className="text-sm text-gray-500">(Inclusive of all taxes)</p>
             </div>
-            <p className="text-lg font-semibold">{totalPrice}</p>
+            <p className="text-lg font-semibold">{finalPrice}</p>
           </div>
         </div>
       </div>
