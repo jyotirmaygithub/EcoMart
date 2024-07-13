@@ -1,29 +1,25 @@
-import React, { useState } from "react";
-import ReorderIcon from "@mui/icons-material/Reorder";
+import React, { useEffect, useState } from "react";
 import SearchBar from "./searchBar";
 import CartIcon from "./cartIcon";
-import { Link } from "react-router-dom";
-// import { useHistory } from "react-router-dom";
-import Sidebar from "./sideBar";
-import { useSelector } from "react-redux";
 import ProfileModal from "./profileModal";
+import { retrieveCartItems } from "../../actions/cartAction";
+import { fetchUserDetails } from "../../actions/userActions";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
-  // const history = useHistory();
+  const dispatch = useDispatch();
+  const navigation = useNavigate();
   const { isAuthenticated, user } = useSelector((state) => state.userData);
 
   const [searchBarActive, setSearchBarActive] = useState(false);
-  const [country, setCountry] = useState("in");
-  const [sideMenu, setSideMenu] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
-  const handleSideBarMenu = () => {
-    setSideMenu(!sideMenu);
-  };
-
-  const handleCountryChange = (event) => {
-    setCountry(event.target.value);
-  };
+  useEffect(() => {
+    dispatch(retrieveCartItems());
+    dispatch(fetchUserDetails());
+  }, [dispatch]);
 
   const handleSearchButtonClick = () => {
     setSearchBarActive(!searchBarActive);
@@ -36,10 +32,7 @@ function Header() {
   const handleSearchFormSubmit = (event) => {
     event.preventDefault();
     if (searchValue.trim()) {
-      // history.push(`/products/${searchValue}`);
-    } else {
-      // history.push("/products");
-    }
+    } 
   };
 
   const handleCrossButtonClick = () => {
@@ -50,39 +43,32 @@ function Header() {
   return (
     <>
       <div className="header">
-        <div className="bg-white shadow-lg">
-          <div className="container mx-auto px-20">
-            <div className="flex justify-between items-center py-6 space-x-4">
-              <div className="flex items-center space-x-5">
-                <Link to="/">
-                  <img
-                    src="https://images.unsplash.com/photo-1615915468538-0fbd857888ca?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1MTIzNDJ8MHwxfGFsbHx8fHx8fHx8fDE3MjAyNjk1NDN8&ixlib=rb-4.0.3&q=85"
-                    alt="logo"
-                    className="w-16 h-12 rounded-full object-cover"
-                  />
-                </Link>
-                <p>Ecommerce </p>
-              </div>
+        <div className="container px-4 md:px-10 bg-gray-900 fixed z-30 top-0 w-full">
+          <div className="flex flex-col md:flex-row justify-between items-center py-4 md:py-6 space-y-4 md:space-y-0 md:space-x-4">
+            <div
+              className="flex items-center space-x-5 cursor-pointer"
+              onClick={() => navigation("/")}
+            >
+              <p className="font-bold text-2xl text-white">EcoMart</p>
+            </div>
 
-              <div className="flex items-center w-full justify-end space-x-5">
-                <div className="flex justify-end w-full ">
-                  <SearchBar
-                    searchBarActive={searchBarActive}
-                    searchValue={searchValue}
-                    handleCrossButtonClick={handleCrossButtonClick}
-                    handleSearchButtonClick={handleSearchButtonClick}
-                    handleSearchInputChange={handleSearchInputChange}
-                    handleSearchFormSubmit={handleSearchFormSubmit}
-                  />
-                </div>
-                <div>
-                  <Link to="/cart">
-                    <CartIcon />
-                  </Link>
-                </div>
-                <div>
-                  <ProfileModal user={user} isAuthenticated={isAuthenticated} />
-                </div>
+            <div className="flex items-center w-full justify-end space-x-5">
+              <div className="flex justify-end w-full md:w-auto">
+                <SearchBar
+                  searchValue={searchValue}
+                  handleCrossButtonClick={handleCrossButtonClick}
+                  handleSearchButtonClick={handleSearchButtonClick}
+                  handleSearchInputChange={handleSearchInputChange}
+                  handleSearchFormSubmit={handleSearchFormSubmit}
+                />
+              </div>
+              <div>
+                <Link to="/cart">
+                  <CartIcon />
+                </Link>
+              </div>
+              <div>
+                <ProfileModal user={user} isAuthenticated={isAuthenticated} />
               </div>
             </div>
           </div>

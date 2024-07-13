@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -14,10 +15,37 @@ const ContactForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Your message has been sent successfully");
-    // Implement your form submission logic here
+
+    // Validate form data
+    if (!formData.email || !formData.message) {
+      toast.error("Please fill in all fields before submitting.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_DEV_URL}/api/nodemailer/send-email`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        toast.success("Message sent successfully!");
+      } else {
+        toast.error("Failed to send message. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("An error occurred while sending the message.");
+    } finally {
+    }
   };
 
   const handleCall = () => {
@@ -58,7 +86,7 @@ const ContactForm = () => {
         </p>
 
         <p className="text-gray-700 mb-4">
-          <span className="font-semibold">Ecommerce Store, Pvt Ltd.</span>
+          <span className="font-semibold">EcoMart Store, Pvt Ltd.</span>
           <br />
           15130 Sec 22
           <br />

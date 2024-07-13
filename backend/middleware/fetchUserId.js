@@ -1,7 +1,7 @@
 const JWT = require("jsonwebtoken");
 require("dotenv").config();
 
-const JWT_secret = process.env.HOTELS_JWT_SECRET;
+const JWT_secret = process.env.ECOMMERCE_JWT_SECRET;
 
 function fetchUserId(req, res, next) {
   const token = req.header("auth-token");

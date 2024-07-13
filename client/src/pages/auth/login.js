@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   TextField,
-  FormControlLabel,
-  Checkbox,
   Button,
   Typography,
   Grid,
@@ -11,17 +9,18 @@ import {
   CssBaseline,
   IconButton,
   Box,
+  Link as MuiLink, // Renamed to MuiLink to avoid conflict with react-router-dom Link
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Copyright from "../../components/copyRight";
+import CircularLoader from "../../layout/loader/Loader";
+import { toast } from "react-toastify";
+import { login } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../actions/userActions";
-import Loader from "../../layout/loader/Loader";
-import Copyright from "../../components/copyRight";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { toast } from "react-toastify";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -84,72 +83,115 @@ export default function Login() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOpenIcon />
+            <Avatar sx={{ m: 1, bgcolor: "#F1C40F" }}>
+              <LockOpenIcon
+                sx={{
+                  bgcolor: "#F1C40F",
+                }}
+              />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in to Your Account
             </Typography>
-            {/* <Box component="form" onSubmit={handleLoginSubmit} sx={{ mt: 1 }}> */}
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              value={email}
-              onChange={handleEmailChange}
-              error={!isValidEmail && email !== ""}
-              helperText={
-                !isValidEmail && email !== ""
-                  ? "Please enter a valid email address."
-                  : ""
-              }
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type={showPassword ? "text" : "password"}
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={handlePasswordChange}
-              InputProps={{
-                endAdornment: (
-                  <IconButton onClick={handleShowPasswordClick}>
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                ),
-              }}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              disabled={isSignInDisabled}
-              onClick={handleLoginSubmit}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="/password/forgot" variant="body2">
-                  Forgot your password?
-                </Link>
+            <Box component="form" onSubmit={handleLoginSubmit} sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                value={email}
+                onChange={handleEmailChange}
+                error={!isValidEmail && email !== ""}
+                helperText={
+                  !isValidEmail && email !== ""
+                    ? "Please enter a valid email address."
+                    : ""
+                }
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type={showPassword ? "text" : "password"}
+                id="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={handlePasswordChange}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton onClick={handleShowPasswordClick}>
+                      {showPassword ? (
+                        <VisibilityOff sx={{ fontSize: 30 }} />
+                      ) : (
+                        <Visibility sx={{ fontSize: 30 }} />
+                      )}
+                    </IconButton>
+                  ),
+                }}
+              />
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                align="center"
+                mt={2}
+              >
+                By signing in, you accept the EcoMart{" "}
+                <MuiLink
+                  href="#"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    // Handle link to terms of use
+                  }}
+                >
+                  Terms of Use
+                </MuiLink>{" "}
+                and acknowledge EcoMart will use your information in
+                accordance with its{" "}
+                <MuiLink
+                  href="#"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    // Handle link to privacy policy
+                  }}
+                >
+                  Privacy Policy
+                </MuiLink>
+                .
+              </Typography>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{
+                  my: 3,
+                  bgcolor: "#F1C40F",
+                  borderRadius: "20px",
+                  "&:hover": {
+                    bgcolor: "#F1C40F",
+                  },
+                }}
+                disabled={isSignInDisabled}
+              >
+                {loading ? <CircularLoader /> : "Sign In"}
+              </Button>
+              <Grid container>
+                <Grid item>
+                  <Link
+                    to="/signup"
+                    variant="body2"
+                    className="hover:underline"
+                  >
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+            </Box>
           </Box>
           <Copyright sx={{ mt: 2, mb: 4 }} />
         </Container>

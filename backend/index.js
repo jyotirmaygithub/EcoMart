@@ -16,12 +16,13 @@ app.use(express.json());
 
 // available routes in the project
 app.use("/api/auth", require("./routes/auth"));
-// app.use("/api/editProfile" , require("./routes/editProfile"))
-// app.use("/api/retriveData" ,require("./routes/retriveData"))
-// app.use("/api/booking" , require("./routes/booking"))
-// app.use("/api/newHotel" , require("./routes/newHotel"))
-// app.use("/api/nodemailer", require("./routes/nodemailer"))
+app.use("/api/shipping" , require("./routes/shipping"))
+app.use("/api/retriveData" ,require("./routes/retriveData"))
+app.use("/api/cart", require("./routes/cart"));
+app.use("/api/update" , require("./routes/update"))
+app.use("/api/delete" , require("./routes/delete"))
+app.use("/api/order" , require("./routes/order"))
 
 app.listen(port, () => {
-  console.log(`hotel-backend is working on port number :  ${port}`);
+  console.log(`ecommerc-backend is working on port number :  ${port}`);
 });

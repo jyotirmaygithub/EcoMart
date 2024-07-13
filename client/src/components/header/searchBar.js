@@ -4,22 +4,12 @@ import { SearchOutlined, CloseOutlined } from "@mui/icons-material";
 const Search = ({
   handleSearchButtonClick,
   handleCrossButtonClick,
-  searchBarActive,
   handleSearchFormSubmit,
   handleSearchInputChange,
   searchValue,
 }) => {
   return (
     <>
-      {!searchBarActive && (
-        <button
-          onClick={handleSearchButtonClick}
-          className="border-none outline-none bg-transparent cursor-pointer"
-        >
-          <SearchOutlined fontSize="large" className="text-gray-700" />
-        </button>
-      )}
-      {searchBarActive && (
         <div className="flex items-center w-full bg-gray-200 rounded-full p-1.5">
           <form
             onSubmit={handleSearchFormSubmit}
@@ -29,7 +19,7 @@ const Search = ({
               onClick={handleSearchFormSubmit}
               className="border-none outline-none bg-transparent cursor-pointer"
             >
-              <SearchOutlined fontSize="large" className="text-gray-700" />
+              <SearchOutlined fontSize="large"sx={{color : "#212529"}} />
             </button>
             <input
               type="text"
@@ -43,10 +33,9 @@ const Search = ({
             onClick={handleCrossButtonClick}
             className="border-none outline-none bg-transparent cursor-pointer"
           >
-            <CloseOutlined fontSize="large" className="text-gray-700" />
+            <CloseOutlined fontSize="large" sx={{color : "#212529"}}  />
           </button>
         </div>
-      )}
     </>
   );
 };

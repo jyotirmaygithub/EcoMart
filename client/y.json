@@ -1,0 +1,123 @@
+[
+    {
+        "id": 1,
+        "name": "Nikon D5600 DSLR",
+        "brand": "Nikon",
+        "ratings": 4.5,
+        "price": 49999,
+        "original_price": 55999,
+        "discount": 11,
+        "savings": 6000,
+        "availability": "In Stock",
+        "description": "The Nikon D5600 DSLR is a versatile and advanced camera designed for both amateur and professional photographers. It features a 24.2 MP CMOS sensor and EXPEED 4 image processor, which together deliver stunning image quality with remarkable detail and vibrant colors. The camera supports Full HD 1080p video recording at 60 fps, making it perfect for capturing high-quality videos. Additionally, the built-in SnapBridge technology allows for seamless transfer of photos to your smart devices. The D5600 also offers a 39-point autofocus system, a 3.2-inch vari-angle touchscreen LCD, and a wide range of creative filters and effects to enhance your photography experience.",
+        "inclusive_of_taxes": true,
+        "images": [
+            "url_to_nikon_d5600_image_1",
+            "url_to_nikon_d5600_image_2",
+            "url_to_nikon_d5600_image_3",
+            "url_to_nikon_d5600_image_4"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "1984",
+        "author": "George Orwell",
+        "ratings": 4.7,
+        "price": 599,
+        "original_price": 699,
+        "discount": 14,
+        "savings": 100,
+        "availability": "In Stock",
+        "description": "George Orwell's '1984' is a dystopian novel set in a totalitarian society controlled by the Party and its leader, Big Brother. The book explores themes of surveillance, propaganda, and individuality through the story of Winston Smith, a low-ranking member of the Party who begins to question the oppressive regime. '1984' is a powerful and thought-provoking read that has become a timeless classic, offering a chilling depiction of a world where freedom and truth are subjugated. This edition is perfect for readers who appreciate literature that challenges societal norms and provokes deep reflection.",
+        "inclusive_of_taxes": true,
+        "images": [
+            "url_to_1984_image_1",
+            "url_to_1984_image_2"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Women's Summer Dress",
+        "brand": "Zara",
+        "ratings": 4.7,
+        "price": 2499,
+        "original_price": 2999,
+        "discount": 17,
+        "savings": 500,
+        "availability": "In Stock",
+        "description": "This Women's Summer Dress by Zara is the perfect addition to your summer wardrobe. Crafted from lightweight and breathable fabric, the dress features a beautiful floral print that exudes a fresh and vibrant look. The sleeveless design and comfortable fit make it ideal for warm weather, while the flowy silhouette adds a touch of elegance. Whether you're heading to a beach party or a casual brunch, this dress will keep you looking stylish and feeling comfortable all day long.",
+        "inclusive_of_taxes": true,
+        "images": [
+          "url_to_womens_summer_dress_image_1",
+          "url_to_womens_summer_dress_image_2"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Men's Running Shoes",
+        "brand": "Nike",
+        "ratings": 4.8,
+        "price": 6999,
+        "original_price": 7499,
+        "discount": 7,
+        "savings": 500,
+        "availability": "In Stock",
+        "description": "Nike Men's Running Shoes are engineered to provide exceptional comfort and performance for runners. The shoes feature a breathable mesh upper that keeps your feet cool and dry, while the cushioned sole offers excellent shock absorption and support. Designed with durability and style in mind, these running shoes are perfect for both casual joggers and serious athletes. The lightweight construction and secure fit ensure that you can run with confidence and ease, making these shoes a must-have for your athletic gear collection.",
+        "inclusive_of_taxes": true,
+        "images": [
+          "url_to_mens_running_shoes_image_1",
+          "url_to_mens_running_shoes_image_2"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Vacuum Cleaner",
+        "brand": "Dyson",
+        "ratings": 4.8,
+        "price": 24999,
+        "original_price": 27999,
+        "discount": 11,
+        "savings": 3000,
+        "availability": "In Stock",
+        "description": "The Dyson Vacuum Cleaner is a top-of-the-line cleaning appliance that combines powerful suction with cordless convenience. Its lightweight design makes it easy to maneuver around the house, while the advanced filtration system captures allergens and expels cleaner air. With a runtime of up to 60 minutes, this vacuum cleaner is perfect for thorough cleaning of both carpets and hard floors. The versatile attachments and hygienic bin emptying feature ensure that you can clean every nook and cranny with ease. Invest in the Dyson Vacuum Cleaner for a spotless home with minimal effort.",
+        "inclusive_of_taxes": true,
+        "images": [
+          "url_to_vacuum_cleaner_image_1",
+          "url_to_vacuum_cleaner_image_2"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Electric Kettle",
+        "brand": "Cuisinart",
+        "ratings": 4.7,
+        "price": 3999,
+        "original_price": 4999,
+        "discount": 20,
+        "savings": 1000,
+        "availability": "In Stock",
+        "description": "The Cuisinart Electric Kettle is a stylish and efficient kitchen appliance that boils water quickly and safely. With a capacity of 1.7 liters, it is perfect for making tea, coffee, and instant meals. The stainless steel construction ensures durability and a sleek appearance, while the ergonomic handle and drip-free spout provide convenience in pouring. The kettle features an automatic shut-off and boil-dry protection for added safety. Enhance your kitchen with this reliable and elegant electric kettle from Cuisinart.",
+        "inclusive_of_taxes": true,
+        "images": [
+          "url_to_electric_kettle_image_1",
+          "url_to_electric_kettle_image_2"
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Sunscreen SPF 50",
+        "brand": "Neutrogena",
+        "ratings": 4.7,
+        "price": 1499,
+        "original_price": 1799,
+        "discount": 17,
+        "savings": 300,
+        "availability": "In Stock",
+        "description": "Neutrogena Sunscreen SPF 50 provides superior protection against harmful UVA and UVB rays, making it an essential part of your skincare routine. This water-resistant sunscreen is perfect for outdoor activities and prolonged sun exposure. The lightweight, non-greasy formula absorbs quickly into the skin, leaving no residue. With its broad-spectrum protection, this sunscreen helps prevent sunburn and reduces the risk of skin cancer and early skin aging caused by the sun. Keep your skin safe and healthy with Neutrogena Sunscreen SPF 50.",
+        "inclusive_of_taxes": true,
+        "images": [
+          "url_to_sunscreen_spf_50_image_1",
+          "url_to_sunscreen_spf_50_image_2"
+        ]
+    }
+]
