@@ -4,6 +4,11 @@
 
 # Ecomart - E-commerce Shopping App
 
+## Demo
+
+### Watch the Demo Video
+[![Watch the project demo](assets/thumbnail.jpg)](https://drive.google.com/file/d/1lREHjuIewfbDqEpcG-xLftd1ZIvA8M7u/view?usp=sharing)
+
 ## Introduction
 
 Welcome to Ecomart, an e-commerce shopping app built using the MERN (MongoDB, Express, React, Node.js) stack and Material-UI for the user interface. This project provides both normal user and admin modes, offering a wide range of features to enhance the shopping experience.
